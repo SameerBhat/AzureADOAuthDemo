@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AzureADWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AzureADWeb.Controllers;
 
@@ -18,7 +19,7 @@ public class HomeController : Controller
         return View();
     }
 
-    
+    [Authorize]
     public IActionResult Privacy()
     {
         return View();
