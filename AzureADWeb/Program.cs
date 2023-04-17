@@ -27,10 +27,12 @@ builder.Services.AddAuthentication(options =>
         
         // this is the app id/ client id of the app that we are trying to access.
         options.ClientId = "f5c87a9f-f8ff-4df3-ade5-c102c4a9f5f6";
+
+        options.ClientSecret = "GeG8Q~zUIn4IqL9caEhNN9M-q_kmMsRvvcBkqbsC";
         
         // we have set in our app redirect uris tab to be "ID tokens (used for implicit and hybrid flows)", we are using implicit flow here.
         // this basically means we want identity token to be returned in the callback url from the authorization endpoint.
-        options.ResponseType = "id_token";
+        options.ResponseType = "code";
         
         
         options.SaveTokens = true;
@@ -74,4 +76,15 @@ app.Run();
 
 // Install this package: Microsoft.AspNetCore.Authentication.OpenIdConnect - ASP.NET Core middleware that enables an application to support the OpenID Connect authentication workflow.
 // Install this package as well: Microsoft.Identity.Web - This package enables ASP.NET Core web apps and web APIs to use the Microsoft identity platform (formerly Azure AD v2.0).
+
+
+
+// DISABLING THE IMPLICIT FLOW/GRANT TYPE because this is more secure and this is what we should be using in server side apps.
+// change the application type from id_token to code flow.
+// for that go to the app registration page and go to Authentication tab and uncheck the ID tokens (used for implicit and hybrid flows)
+// then go to Certificates and secrets tab and create a new client secret and copy the value of it.
+// then go to Program.cs and change the options.ResponseType = "id_token"; to options.ResponseType = "code" in the AddOpenIdConnect method.
+// also add the secret to "options.ClientSecret" property.
+
+
 
